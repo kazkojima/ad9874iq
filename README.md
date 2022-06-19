@@ -25,7 +25,7 @@ examples/colorlight_i5.py is a running example using LiteX on Colorlight-i5 boar
 ```
 to the litex platform description file platform/colorlight_i5.py.
 
-The following code snippet added to litex bios will send 16-bit IQ samples to host udp 6000 port forever.
+The following code snippet added to litex bios will send 16-bit IQ samples to host udp 6000 port forever. Instead of patching bios, you can use ad9874iq example app [calling litex bios functions](https://github.com/kazkojima/litex-bioscall-examples).
 ```
 diff --git a/litex/soc/software/bios/boot.c b/litex/soc/software/bios/boot.c
 index aeaa8665..7eed65e1 100644
