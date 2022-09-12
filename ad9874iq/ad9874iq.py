@@ -17,8 +17,10 @@ class AD9874IQ(Module, AutoCSR):
     def __init__(self, platform, pads):
 
         platform.add_source(data_file("ssi.v"), "verilog")
-    
-        self.submodules.fifo = fifo = stream.SyncFIFO([("data", 32)], 512)
+
+        fifo = stream.AsyncFIFO([("data", 32)], 1024)
+        fifo = ClockDomainsRenamer({"write": "ssi", "read": "sys"})(fifo)
+        self.submodules.fifo = fifo
 
         # CPU side
         self.ready = CSRStatus(1)
@@ -38,7 +40,7 @@ class AD9874IQ(Module, AutoCSR):
         ]
 
         self.specials += Instance("AD9874SSIReceiver",
-                                  i_clk = ClockSignal(),
+                                  i_clk = ClockSignal("ssi"),
                                   i_rst = ResetSignal(),
                                   i_serial_data_in = pads.data,
                                   i_serial_clock_in = pads.clk,

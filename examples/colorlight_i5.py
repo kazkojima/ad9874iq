@@ -77,6 +77,13 @@ class _CRG(Module):
         else:
            pll.create_clkout(self.cd_sys_ps, sys_clk_freq, phase=180) # Idealy 90° but needs to be increased.
 
+        # SSI PLL
+        self.submodules.ssi_pll = ssi_pll = ECP5PLL()
+        self.comb += ssi_pll.reset.eq(~rst_n | self.rst)
+        pll.register_clkin(clk, clk_freq)
+        self.clock_domains.cd_ssi = ClockDomain()
+        ssi_pll.create_clkout(self.cd_ssi, 8*18e6)
+
         # USB PLL
         if with_usb_pll:
             self.submodules.usb_pll = usb_pll = ECP5PLL()
