@@ -42,8 +42,7 @@ class AD9874IQ(Module, AutoCSR):
         self.specials += Instance("AD9874SSIReceiver",
                                   i_clk = ClockSignal("ssi"),
                                   i_rst = ResetSignal(),
-                                  i_serial_data_in = pads.data,
-                                  i_serial_clock_in = pads.clk,
-                                  i_frame_start_in = pads.frame,
+                                  i_serial_data_in = pads.cdata,
+                                  i_serial_clock_in = pads.cclk,
                                   o_iq_data_out = iq,
                                   o_iq_strobe_out = iq_strobe_out)
