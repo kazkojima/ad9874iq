@@ -11,5 +11,6 @@ def data_file(f):
     return fn
 
 from .ad9874iq import AD9874IQ
+from .pwmi import PWMI
 
-__all__ = [AD9874IQ]
+__all__ = [AD9874IQ, PWMI]

@@ -36,7 +36,7 @@ from litedram.phy import ECP5DDRPHY
 from liteeth.phy.ecp5rgmii import LiteEthPHYRGMII
 
 sys.path.append(os.path.abspath(".."))
-from ad9874iq import AD9874IQ
+from ad9874iq import AD9874IQ, PWMI
 
 # CRG ---------------------------------------------------------------------------------------------
 
@@ -180,11 +180,10 @@ class BaseSoC(SoCCore):
             platform.add_extension(butterstick.raw_syzygy_io("SYZYGY0"))
             self.submodules.gpio = GPIOTristate(platform.request("SYZYGY0"))
 
-        # AD9874 SPI -------------------------------------------------------------------------------
-        pads = self.platform.request("spi")
-        pads.miso = Signal()
-        self.submodules.spi = SPIMaster(pads, 16, self.sys_clk_freq, 4e6)
-        self.spi.add_clk_divider()
+        # AD9874 PWMI -------------------------------------------------------------------------------
+        pads = self.platform.request("pwmi")
+        self.submodules.pwmi = PWMI(pads, 16, self.sys_clk_freq, 600e3)
+        self.pwmi.add_clk_divider()
         
         # AD9874 SSI -------------------------------------------------------------------------------
         self.submodules.ad9874iq = AD9874IQ(platform, platform.request("ssi"))

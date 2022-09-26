@@ -64,11 +64,20 @@ class AD9874SSIReceiver(Elaboratable):
         up_sample = self._up_sample
         iq_width = self.iq_width
 
+        bit_clock_pre  = Signal()
+        data_clock_pre = Signal()
+        m.submodules.bit_clock_synchronizer  = FFSynchronizer(self.serial_clock_in, bit_clock_pre)
+        m.submodules.data_clock_synchronizer = FFSynchronizer(self.serial_data_in, data_clock_pre)
+
         bit_clock  = Signal()
         data_clock = Signal()
-        m.submodules.bit_clock_synchronizer  = FFSynchronizer(self.serial_clock_in, bit_clock)
-        m.submodules.data_clock_synchronizer = FFSynchronizer(self.serial_data_in, data_clock)
-
+        m.d.comb += [
+            bit_clock.eq(bit_clock_pre)
+        ]
+        m.d.sync += [
+            data_clock.eq(data_clock_pre)
+        ]
+        
         bit_clock_rose  = Signal()
         bit_clock_fell  = Signal()
         m.d.comb += [
