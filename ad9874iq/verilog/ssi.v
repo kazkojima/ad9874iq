@@ -3,69 +3,75 @@
 (* \amaranth.hierarchy  = "AD9874SSIReceiver" *)
 (* top =  1  *)
 (* generator = "Amaranth" *)
-module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, serial_clock_in);
+module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, delayed_clock, delayed_data, clk, rst, serial_clock_in);
   reg \$auto$verilog_backend.cc:2083:dump_module$1  = 0;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:43" *)
   wire \$1 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:94" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:109" *)
   wire \$11 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:100" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:115" *)
   wire [4:0] \$13 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:100" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:115" *)
   wire [4:0] \$14 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
   wire \$16 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:113" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:128" *)
   wire \$18 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
   wire \$20 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
   wire \$22 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:127" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:142" *)
   wire [6:0] \$24 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:127" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:142" *)
   wire [6:0] \$25 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
   wire \$27 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:132" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:147" *)
   wire [4:0] \$29 ;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:43" *)
   wire \$3 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:132" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:147" *)
   wire \$30 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:132" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:147" *)
   wire [4:0] \$32 ;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:41" *)
   wire \$7 ;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:41" *)
   wire \$9 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:72" *)
-  wire bit_clock;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:82" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:78" *)
+  reg bit_clock;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:80" *)
+  reg bit_clock_delayed = 1'h0;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:80" *)
+  reg \bit_clock_delayed$next ;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:97" *)
   wire bit_clock_fell;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:81" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:96" *)
   wire bit_clock_rose;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:67" *)
-  wire bit_clock_synchronizer_bit_clock_pre;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:89" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:73" *)
+  wire bit_clock_synchronizer_bit_clock_raw;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:104" *)
   reg bit_data;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input clk;
   wire clk;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:88" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:103" *)
   reg [3:0] count_d = 4'h0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:88" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:103" *)
   reg [3:0] \count_d$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:87" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:102" *)
   reg [3:0] count_f = 4'h0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:87" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:102" *)
   reg [3:0] \count_f$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:73" *)
-  reg data_clock = 1'h0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:73" *)
-  reg \data_clock$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:68" *)
-  wire data_clock_synchronizer_data_clock_pre;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:79" *)
+  reg data_clock;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:81" *)
+  reg data_clock_delayed = 1'h0;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:81" *)
+  reg \data_clock_delayed$next ;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:74" *)
+  wire data_clock_synchronizer_data_clock_raw;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:35" *)
   reg delayed = 1'h0;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:35" *)
@@ -74,55 +80,63 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
   reg \delayed$5$next ;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:35" *)
   reg \delayed$next ;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:64" *)
+  input delayed_clock;
+  wire delayed_clock;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:65" *)
+  input delayed_data;
+  wire delayed_data;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:39" *)
   wire edge_detected;
   (* src = "/home/git/amlib/amlib/utils/__init__.py:39" *)
   wire \edge_detected$6 ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
   reg [1:0] fsm_state = 2'h0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
   reg [1:0] \fsm_state$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:58" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:62" *)
   output [31:0] iq_data_out;
   reg [31:0] iq_data_out = 32'd0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:58" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:62" *)
   reg [31:0] \iq_data_out$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:59" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:63" *)
   output iq_strobe_out;
   reg iq_strobe_out = 1'h0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:59" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:63" *)
   reg \iq_strobe_out$next ;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input rst;
   wire rst;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:104" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:119" *)
   reg [31:0] rx_buf = 32'd0;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:104" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:119" *)
   reg [31:0] \rx_buf$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:105" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" *)
   reg [5:0] rx_cnt = 6'h00;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:105" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" *)
   reg [5:0] \rx_cnt$next ;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:55" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:59" *)
   input serial_clock_in;
   wire serial_clock_in;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:56" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:60" *)
   input serial_data_in;
   wire serial_data_in;
   assign \$9  = \delayed$5  & (* src = "/home/git/amlib/amlib/utils/__init__.py:41" *) \$7 ;
-  assign \$11  = count_d >= (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:94" *) 3'h5;
-  assign \$14  = count_f + (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:100" *) 1'h1;
-  assign \$16  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *) rx_cnt;
-  assign \$18  = count_f >= (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:113" *) 3'h6;
+  assign \$11  = count_d >= (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:109" *) 3'h5;
+  assign \$14  = count_f + (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:115" *) 1'h1;
+  assign \$16  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *) rx_cnt;
+  assign \$18  = count_f >= (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:128" *) 3'h6;
   assign \$1  = ~ (* src = "/home/git/amlib/amlib/utils/__init__.py:43" *) delayed;
-  assign \$20  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *) rx_cnt;
-  assign \$22  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *) rx_cnt;
-  assign \$25  = rx_cnt - (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:127" *) 1'h1;
-  assign \$27  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *) rx_cnt;
-  assign \$30  = data_clock != (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:132" *) bit_clock;
-  assign \$32  = count_d + (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:132" *) \$30 ;
+  assign \$20  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *) rx_cnt;
+  assign \$22  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *) rx_cnt;
+  assign \$25  = rx_cnt - (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:142" *) 1'h1;
+  assign \$27  = ! (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *) rx_cnt;
+  assign \$30  = data_clock != (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:147" *) bit_clock;
+  assign \$32  = count_d + (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:147" *) \$30 ;
   always @(posedge clk)
-    data_clock <= \data_clock$next ;
+    bit_clock_delayed <= \bit_clock_delayed$next ;
+  always @(posedge clk)
+    data_clock_delayed <= \data_clock_delayed$next ;
   always @(posedge clk)
     delayed <= \delayed$next ;
   always @(posedge clk)
@@ -131,9 +145,9 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
     count_f <= \count_f$next ;
   always @(posedge clk)
     iq_strobe_out <= \iq_strobe_out$next ;
+  assign \$3  = \$1  & (* src = "/home/git/amlib/amlib/utils/__init__.py:43" *) bit_clock;
   always @(posedge clk)
     rx_buf <= \rx_buf$next ;
-  assign \$3  = \$1  & (* src = "/home/git/amlib/amlib/utils/__init__.py:43" *) bit_clock;
   always @(posedge clk)
     fsm_state <= \fsm_state$next ;
   always @(posedge clk)
@@ -144,46 +158,89 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
     iq_data_out <= \iq_data_out$next ;
   assign \$7  = ~ (* src = "/home/git/amlib/amlib/utils/__init__.py:41" *) bit_clock;
   bit_clock_synchronizer bit_clock_synchronizer (
-    .bit_clock_pre(bit_clock_synchronizer_bit_clock_pre),
+    .bit_clock_raw(bit_clock_synchronizer_bit_clock_raw),
     .clk(clk),
     .rst(rst),
     .serial_clock_in(serial_clock_in)
   );
   data_clock_synchronizer data_clock_synchronizer (
     .clk(clk),
-    .data_clock_pre(data_clock_synchronizer_data_clock_pre),
+    .data_clock_raw(data_clock_synchronizer_data_clock_raw),
     .rst(rst),
     .serial_data_in(serial_data_in)
   );
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
-    \data_clock$next  = data_clock_synchronizer_data_clock_pre;
+    \bit_clock_delayed$next  = bit_clock_synchronizer_bit_clock_raw;
     (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/xfrm.py:519" *)
     casez (rst)
       1'h1:
-          \data_clock$next  = 1'h0;
+          \bit_clock_delayed$next  = 1'h0;
+    endcase
+  end
+  always @* begin
+    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
+    \data_clock_delayed$next  = data_clock_synchronizer_data_clock_raw;
+    (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/xfrm.py:519" *)
+    casez (rst)
+      1'h1:
+          \data_clock_delayed$next  = 1'h0;
+    endcase
+  end
+  always @* begin
+    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
+    (* full_case = 32'd1 *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:109" *)
+    casez (\$11 )
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:109" */
+      1'h1:
+          bit_data = 1'h1;
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:111" */
+      default:
+          bit_data = 1'h0;
+    endcase
+  end
+  always @* begin
+    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
+    \count_f$next  = count_f;
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:114" *)
+    casez (bit_clock)
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:114" */
+      1'h1:
+          \count_f$next  = \$14 [3:0];
+    endcase
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" *)
+    casez (bit_clock_fell)
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      1'h1:
+          \count_f$next  = 4'h0;
+    endcase
+    (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/xfrm.py:519" *)
+    casez (rst)
+      1'h1:
+          \count_f$next  = 4'h0;
     endcase
   end
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \iq_strobe_out$next  = iq_strobe_out;
     (* full_case = 32'd1 *)
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
           \iq_strobe_out$next  = 1'h0;
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
           /* empty */;
       /* \amaranth.decoding  = "FRAME_END/3" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:150" */
       2'h3:
           \iq_strobe_out$next  = 1'h1;
     endcase
@@ -196,30 +253,30 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \rx_buf$next  = rx_buf;
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
           \rx_buf$next  = 32'd0;
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
           (* full_case = 32'd1 *)
-          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
           casez (\$16 )
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" */
             1'h1:
                 /* empty */;
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:138" */
             default:
-                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" *)
+                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" *)
                 casez (bit_clock_rose)
-                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" */
+                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" */
                   1'h1:
                       \rx_buf$next  = { rx_buf[30:0], bit_data };
                 endcase
@@ -235,32 +292,32 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \fsm_state$next  = fsm_state;
     (* full_case = 32'd1 *)
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
-          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:113" *)
+          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:128" *)
           casez (\$18 )
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:113" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:128" */
             1'h1:
                 \fsm_state$next  = 2'h1;
           endcase
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           \fsm_state$next  = 2'h2;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
-          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
           casez (\$20 )
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" */
             1'h1:
                 \fsm_state$next  = 2'h3;
           endcase
       /* \amaranth.decoding  = "FRAME_END/3" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:150" */
       2'h3:
           \fsm_state$next  = 2'h0;
     endcase
@@ -273,30 +330,30 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \rx_cnt$next  = rx_cnt;
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           \rx_cnt$next  = 6'h20;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
           (* full_case = 32'd1 *)
-          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
           casez (\$22 )
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" */
             1'h1:
                 /* empty */;
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:138" */
             default:
-                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" *)
+                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" *)
                 casez (bit_clock_rose)
-                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" */
+                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" */
                   1'h1:
                       \rx_cnt$next  = \$25 [5:0];
                 endcase
@@ -311,34 +368,34 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \count_d$next  = count_d;
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
           (* full_case = 32'd1 *)
-          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" *)
+          (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" *)
           casez (\$27 )
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:121" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:136" */
             1'h1:
                 /* empty */;
-            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
+            /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:138" */
             default:
                 (* full_case = 32'd1 *)
-                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" *)
+                (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" *)
                 casez (bit_clock_rose)
-                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:124" */
+                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:139" */
                   1'h1:
                       \count_d$next  = 4'h0;
-                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:130" */
+                  /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:145" */
                   default:
                       \count_d$next  = \$32 [3:0];
                 endcase
@@ -354,22 +411,22 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
     if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
     \iq_data_out$next  = iq_data_out;
     (* full_case = 32'd1 *)
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:107" *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:122" *)
     casez (fsm_state)
       /* \amaranth.decoding  = "IDLE/0" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:108" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:123" */
       2'h0:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_FRAME_START/1" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:116" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:131" */
       2'h1:
           /* empty */;
       /* \amaranth.decoding  = "WAIT_BIT/2" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:120" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
       2'h2:
           /* empty */;
       /* \amaranth.decoding  = "FRAME_END/3" */
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:135" */
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:150" */
       2'h3:
           \iq_data_out$next  = rx_buf;
     endcase
@@ -377,6 +434,32 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
     casez (rst)
       1'h1:
           \iq_data_out$next  = 32'd0;
+    endcase
+  end
+  always @* begin
+    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
+    (* full_case = 32'd1 *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:86" *)
+    casez (delayed_clock)
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:86" */
+      1'h1:
+          bit_clock = bit_clock_delayed;
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:88" */
+      default:
+          bit_clock = bit_clock_synchronizer_bit_clock_raw;
+    endcase
+  end
+  always @* begin
+    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
+    (* full_case = 32'd1 *)
+    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:91" *)
+    casez (delayed_data)
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:91" */
+      1'h1:
+          data_clock = data_clock_delayed;
+      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:93" */
+      default:
+          data_clock = data_clock_synchronizer_data_clock_raw;
     endcase
   end
   always @* begin
@@ -397,40 +480,6 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
           \delayed$5$next  = 1'h0;
     endcase
   end
-  always @* begin
-    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
-    (* full_case = 32'd1 *)
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:94" *)
-    casez (\$11 )
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:94" */
-      1'h1:
-          bit_data = 1'h1;
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:96" */
-      default:
-          bit_data = 1'h0;
-    endcase
-  end
-  always @* begin
-    if (\$auto$verilog_backend.cc:2083:dump_module$1 ) begin end
-    \count_f$next  = count_f;
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:99" *)
-    casez (bit_clock)
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:99" */
-      1'h1:
-          \count_f$next  = \$14 [3:0];
-    endcase
-    (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:101" *)
-    casez (bit_clock_fell)
-      /* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:101" */
-      1'h1:
-          \count_f$next  = 4'h0;
-    endcase
-    (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/xfrm.py:519" *)
-    casez (rst)
-      1'h1:
-          \count_f$next  = 4'h0;
-    endcase
-  end
   assign \$13  = \$14 ;
   assign \$24  = \$25 ;
   assign \$29  = \$32 ;
@@ -438,22 +487,21 @@ module AD9874SSIReceiver(serial_data_in, iq_data_out, iq_strobe_out, clk, rst, s
   assign bit_clock_rose = edge_detected;
   assign \edge_detected$6  = \$9 ;
   assign edge_detected = \$3 ;
-  assign bit_clock = bit_clock_synchronizer_bit_clock_pre;
 endmodule
 
 (* \amaranth.hierarchy  = "AD9874SSIReceiver.bit_clock_synchronizer" *)
 (* generator = "Amaranth" *)
-module bit_clock_synchronizer(rst, clk, serial_clock_in, bit_clock_pre);
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:67" *)
-  output bit_clock_pre;
-  wire bit_clock_pre;
+module bit_clock_synchronizer(rst, clk, serial_clock_in, bit_clock_raw);
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:73" *)
+  output bit_clock_raw;
+  wire bit_clock_raw;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input clk;
   wire clk;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input rst;
   wire rst;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:55" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:59" *)
   input serial_clock_in;
   wire serial_clock_in;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/lib/cdc.py:89" *)
@@ -468,24 +516,24 @@ module bit_clock_synchronizer(rst, clk, serial_clock_in, bit_clock_pre);
     stage0 <= \stage0$next ;
   always @(posedge clk)
     stage1 <= \stage1$next ;
-  assign bit_clock_pre = stage1;
+  assign bit_clock_raw = stage1;
   assign \stage1$next  = stage0;
   assign \stage0$next  = serial_clock_in;
 endmodule
 
 (* \amaranth.hierarchy  = "AD9874SSIReceiver.data_clock_synchronizer" *)
 (* generator = "Amaranth" *)
-module data_clock_synchronizer(rst, clk, serial_data_in, data_clock_pre);
+module data_clock_synchronizer(rst, clk, serial_data_in, data_clock_raw);
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input clk;
   wire clk;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:68" *)
-  output data_clock_pre;
-  wire data_clock_pre;
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:74" *)
+  output data_clock_raw;
+  wire data_clock_raw;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/hdl/ir.py:527" *)
   input rst;
   wire rst;
-  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:56" *)
+  (* src = "/home/kkojima/ad9874iq/ad9874iq/verilog/../ad9874ssi.py:60" *)
   input serial_data_in;
   wire serial_data_in;
   (* src = "/home/kkojima/.local/lib/python3.10/site-packages/amaranth/lib/cdc.py:89" *)
@@ -500,7 +548,7 @@ module data_clock_synchronizer(rst, clk, serial_data_in, data_clock_pre);
     stage0 <= \stage0$next ;
   always @(posedge clk)
     stage1 <= \stage1$next ;
-  assign data_clock_pre = stage1;
+  assign data_clock_raw = stage1;
   assign \stage1$next  = stage0;
   assign \stage0$next  = serial_data_in;
 endmodule

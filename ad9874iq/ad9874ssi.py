@@ -32,7 +32,11 @@ class AD9874SSIReceiver(Elaboratable):
             IQ data signal
         iq_strobe_out: Signal()
             reports iq_data_out available
-
+        delayed_clock: Signal(), input
+            use delayed clock_in
+        delayed_data: Signal(), input
+            use delayed data_in
+ 
         Parameters
         ----------
         frame_format: SSI_FORMAT
@@ -57,6 +61,8 @@ class AD9874SSIReceiver(Elaboratable):
         self.test_data_out    = Signal()
         self.iq_data_out      = Signal(iq_width)
         self.iq_strobe_out    = Signal()
+        self.delayed_clock    = Signal()
+        self.delayed_data     = Signal()
 
     def elaborate(self, platform: Platform) -> Module:
         m = Module()
@@ -64,19 +70,28 @@ class AD9874SSIReceiver(Elaboratable):
         up_sample = self._up_sample
         iq_width = self.iq_width
 
-        bit_clock_pre  = Signal()
-        data_clock_pre = Signal()
-        m.submodules.bit_clock_synchronizer  = FFSynchronizer(self.serial_clock_in, bit_clock_pre)
-        m.submodules.data_clock_synchronizer = FFSynchronizer(self.serial_data_in, data_clock_pre)
+        bit_clock_raw  = Signal()
+        data_clock_raw = Signal()
+        m.submodules.bit_clock_synchronizer  = FFSynchronizer(self.serial_clock_in, bit_clock_raw)
+        m.submodules.data_clock_synchronizer = FFSynchronizer(self.serial_data_in, data_clock_raw)
 
         bit_clock  = Signal()
         data_clock = Signal()
-        m.d.comb += [
-            bit_clock.eq(bit_clock_pre)
-        ]
+        bit_clock_delayed  = Signal()
+        data_clock_delayed = Signal()
         m.d.sync += [
-            data_clock.eq(data_clock_pre)
+            bit_clock_delayed.eq(bit_clock_raw),
+            data_clock_delayed.eq(data_clock_raw),
         ]
+        with m.If(self.delayed_clock):
+            m.d.comb += bit_clock.eq(bit_clock_delayed)
+        with m.Else():
+            m.d.comb += bit_clock.eq(bit_clock_raw)
+        
+        with m.If(self.delayed_data):
+            m.d.comb += data_clock.eq(data_clock_delayed)
+        with m.Else():
+            m.d.comb += data_clock.eq(data_clock_raw)
         
         bit_clock_rose  = Signal()
         bit_clock_fell  = Signal()
@@ -202,6 +217,8 @@ if __name__ == "__main__":
         ssi.serial_clock_in,
         ssi.serial_data_in,
         ssi.iq_data_out,
-        ssi.iq_strobe_out
+        ssi.iq_strobe_out,
+        ssi.delayed_clock,
+        ssi.delayed_data,
     ]
     main(ssi, name="AD9874SSIReceiver", ports=ports)
